@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.examples.helloworld";
+option java_outer_classname = "HelloWorldProto";
+option objc_class_prefix = "HLW";
+
+package simple_service;
+
+service SimpleService{
+  // Sends a greeting
+  rpc SayHello (HelloRequest) returns (HelloReply) {}
+  // Sends the area of the rectangle
+  rpc CalcArea (stream RequestArea) returns (ReplyArea) {}
+  // Sends the stream of bus stops according to the specific bus name
+  rpc StopsInfo (BusNameRequest) returns (stream StopNameReply) {}
+  // Sends the stream of bus stops according to the specific stream 
+  // of the buses from client
+  rpc StopsInfoBi (stream BusNameRequestBi) returns (stream StopNameReplyBi) {}
+}
+
+// The request message containing the user's name.
+message HelloRequest {
+  string name = 1;
+}
+
+// The response message containing the greetings
+message HelloReply {
+  string message = 1;
+}
+
+//----------------------------------------------------------------------------
+//----------------------------------------------------------------------------
+
+// Represents the point's coordinates
+message Vector{
+  float x = 1;
+  float y = 2;
+}
+
+// The request message containing the stream of the rectangle's coordinates
+message RequestArea{
+  Vector pos = 1;
+}
+
+message ReplyArea{
+  float area = 1;
+}
+
+//----------------------------------------------------------------------------
+//----------------------------------------------------------------------------
+
+// Represenst the request with bus name to get all stops for this bus
+message BusNameRequest{
+  string bus_name = 1;
+}
+
+message StopNameReply{
+  string stop_name = 1;
+}
+
+//----------------------------------------------------------------------------
+//----------------------------------------------------------------------------
+message BusNameRequestBi{
+  repeated string arr_bus_names = 1; 
+}
+
+message StopNameReplyBi{
+  repeated string arr_stop_names = 1;
+}
+
