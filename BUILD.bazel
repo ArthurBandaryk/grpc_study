@@ -43,3 +43,23 @@ cc_binary(
         "@com_github_grpc_grpc//:grpc++",
     ],
 )
+
+cc_binary(
+    name = "client_async",
+    srcs = ["client_async.cc"],
+    defines = ["BAZEL_BUILD"],
+    deps = [
+        ":hello_cc_grpc",
+        "@com_github_grpc_grpc//:grpc++",
+    ],
+)
+
+cc_binary(
+    name = "server_async",
+    srcs = ["server_async.cc"],
+    defines = ["BAZEL_BUILD"],
+    deps = [
+        ":hello_cc_grpc",
+        "@com_github_grpc_grpc//:grpc++",
+    ],
+)
